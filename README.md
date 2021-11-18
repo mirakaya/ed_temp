@@ -13,10 +13,7 @@ Indexing time - default
 |File Name|Indexing Time| Index Size | Vocabulary Size | Temporary index segments|
 |--|--|--|--|--|
 |Digital_Video_Games|NA|NA|NA|NA|
-|--|--|--|--|--|
 |Digital_Music_Purchase| 0:17:30.987729 |260236974 Bytes | 298858| 171 |
-|--|--|--|--|--|
 |Music|NA|NA|NA|NA|
-|--|--|--|--|--|
 |Books|NA|NA|NA|NA|
-|--|--|--|--|--|
+
