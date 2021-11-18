@@ -1,3 +1,3 @@
 # ed_temp
 
-![Screenshot](Capture.PNG)
+![Screenshot](New folder (2)/Capture.PNG)
