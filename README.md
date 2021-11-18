@@ -1,3 +1,5 @@
 # ed_temp
 
-![Screenshot](New folder (2)/Capture.PNG)
+| col 1      | col 2      |
+|------------|-------------|
+| image 1 | image 2 |
