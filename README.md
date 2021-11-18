@@ -8,6 +8,8 @@ Search time
 
 
 Indexing time - default
+
+
 |File Name|Indexing Time| Index Size | Vocabulary Size | Temporary index segments|
 |Digital_Video_Games|--|--|--|--|
 |------------|-------------|--|--|--|
