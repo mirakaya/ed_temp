@@ -113,7 +113,7 @@ if __name__ == '__main__':
         precision_avr += prc
         recall_avr+=rec
         
-        tsize=(i+2)*0.1  #10% 20% 30%
+        tsize+=0.1  #10% 20% 30%
 
     accuracy_avr = accuracy_avr / nr_repetitions
     precision_avr = precision_avr / nr_repetitions
