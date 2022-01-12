@@ -33,14 +33,10 @@ X=df1[feature_cols] #features
 Y=df1.Binary_Spam
 #print(X)
 #print(Y)
-X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.25, random_state=0)
-
-
-# import the class
-from sklearn.linear_model import LogisticRegression
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.33, random_state=0)
 
 # instantiate the model (using the default parameters)
-logreg = LogisticRegression()
+logreg = LogisticRegression(tol=(1*10**-8))
 
 # fit the model with data
 logreg.fit(X_train,y_train)
