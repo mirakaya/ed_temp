@@ -44,7 +44,7 @@ def calc(X,Y,testsize=0.1,rs=0):
 
 
     # instantiate the model (using the default parameters)
-    logreg = LogisticRegression(tol=(1*10**-8),max_iter=1977) #1977???
+    logreg = LogisticRegression(tol=(1*10**-8),max_iter=2000) #1977???
 
     # fit the model with data
     logreg.fit(X_train,y_train)
@@ -106,18 +106,20 @@ if __name__ == '__main__':
     
     
     for i in range(0, nr_repetitions):
-        rand=rd.randint(0,500000)
-        avr,prc,rec =calc(X,Y,tsize,rand)[-3:]
+        print("Test size ",tsize*100,"%\n")
+        for j in range(0, nr_repetitions):
+            rand=rd.randint(0,500000)
+            avr,prc,rec =calc(X,Y,tsize,rand)[-3:]
 
-        accuracy_avr += avr
-        precision_avr += prc
-        recall_avr+=rec
+            accuracy_avr += avr
+            precision_avr += prc
+            recall_avr+=rec
         
         tsize+=0.1  #10% 20% 30%
 
-    accuracy_avr = accuracy_avr / nr_repetitions
-    precision_avr = precision_avr / nr_repetitions
-    recall_avr = recall_avr / nr_repetitions
+    accuracy_avr = accuracy_avr / nr_repetitions**2
+    precision_avr = precision_avr / nr_repetitions**2
+    recall_avr = recall_avr / nr_repetitions**2
     print("Accuracy avr - ", accuracy_avr)
     print("Precision avr - ", precision_avr)
     print("Recall avr - ", recall_avr)
