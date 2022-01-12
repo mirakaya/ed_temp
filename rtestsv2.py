@@ -106,8 +106,8 @@ if __name__ == '__main__':
     
     
     for i in range(0, nr_repetitions):
-        rand=rd.uniform(0,500000)
-        avr,prc,rec =calc(X,Y,tsize)[-3:]
+        rand=rd.randint(0,500000)
+        avr,prc,rec =calc(X,Y,tsize,rand)[-3:]
 
         accuracy_avr += avr
         precision_avr += prc
