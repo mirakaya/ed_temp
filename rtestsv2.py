@@ -9,6 +9,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 # import the metrics class
 from sklearn import metrics
+#randomgenerator
+import random as rd
+
 def init():
     df1 = pd.read_csv('spambase.data',header=None)
     df1.columns=["word_freq_make", "word_freq_address", "word_freq_all", "word_freq_3d", "word_freq_our", "word_freq_over", "word_freq_remove",\
@@ -35,13 +38,13 @@ def init():
     #print(Y)
     return X,Y
 
-def calc(X,Y,testsize=0.1):
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=testsize, random_state=0)
+def calc(X,Y,testsize=0.1,rs=0):
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=testsize, random_state=rs)
 
 
 
     # instantiate the model (using the default parameters)
-    logreg = LogisticRegression(tol=(1*10**-8))
+    logreg = LogisticRegression(tol=(1*10**-8),max_iter=1977) #1977???
 
     # fit the model with data
     logreg.fit(X_train,y_train)
@@ -52,7 +55,7 @@ def calc(X,Y,testsize=0.1):
     rec=metrics.recall_score(y_test, y_pred)
     print("Accuracy:",acc)
     print("Precision:",prc)
-    print("Recall:",rec)
+    print("Recall:",rec,"\n")
     
     
     return y_test,y_pred,logreg,X_test,acc,prc,rec
@@ -99,16 +102,18 @@ if __name__ == '__main__':
     recall_avr=0
     X,Y=init()
     tsize=0.1
+    rand=0
     
     
     for i in range(0, nr_repetitions):
+        rand=rd.uniform(0,500000)
         avr,prc,rec =calc(X,Y,tsize)[-3:]
 
         accuracy_avr += avr
         precision_avr += prc
         recall_avr+=rec
         
-        tsize=(i+2)*0.1
+        tsize=(i+2)*0.1  #10% 20% 30%
 
     accuracy_avr = accuracy_avr / nr_repetitions
     precision_avr = precision_avr / nr_repetitions
