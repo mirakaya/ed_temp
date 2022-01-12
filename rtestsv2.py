@@ -12,6 +12,7 @@ from sklearn import metrics
 #randomgenerator
 import random as rd
 
+
 def init():
     df1 = pd.read_csv('spambase.data',header=None)
     df1.columns=["word_freq_make", "word_freq_address", "word_freq_all", "word_freq_3d", "word_freq_our", "word_freq_over", "word_freq_remove",\
@@ -108,7 +109,7 @@ if __name__ == '__main__':
     for i in range(0, nr_repetitions):
         print("Test size ",tsize*100,"%\n")
         for j in range(0, nr_repetitions):
-            rand=rd.randint(0,500000)
+            rand=rd.randint(0,2**32-1)
             avr,prc,rec =calc(X,Y,tsize,rand)[-3:]
 
             accuracy_avr += avr
