@@ -87,7 +87,11 @@ def readFile(path):
     # define dataset
     X, y = make_classification(n_samples= int(len(df.index) * 0.8), n_features=df.shape[1] -1, n_informative=n_info, n_redundant=n_redu, random_state=3)
     # define the model
-    model = RandomForestClassifier()
+    model = RandomForestClassifier() #atm ~93.8%
+
+    #model= LogisticRegression() #atm ~85.4%
+
+    model =
 
     # evaluate the model
     cv = RepeatedStratifiedKFold(n_splits=15, n_repeats=5, random_state=3)
