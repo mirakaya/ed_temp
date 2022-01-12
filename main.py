@@ -31,16 +31,36 @@ def readFile(path):
 
     df.columns = ['make', 'address', 'all', '3d', 'our', 'over', 'remove', 'internet', 'order', 'mail', 'receive', 'will', 'people', 'report', 'addresses', 'free', 'business', 'email', 'you', 'credit', 'your', 'font', '000', 'money', 'hp', 'hpl', 'george', '650', 'lab', 'labs', 'telnet', '857', 'data', '415', '85', 'technology', '1999', 'parts', 'pm', 'direct', 'cs', 'meeting', 'original', 'project', 're', 'edu', 'table', 'conference', ';', '(', '[', '!', '$', '#', 'crla', 'crll', 'crlt', 'spam']
 
+    # Delete irrelevant features based on correlation with the result
 
-    #delete columns
+    #plt.figure(figsize=(30, 30))
+    cor = df.corr()
+    #sns.heatmap(cor, annot=True, cmap=plt.cm.Reds)
+    #plt.show()
+
+    # Correlation with output variable
+    cor_target = abs(cor["spam"])
+
+
+    aux = 0
+    for i in df.columns:
+
+        if cor_target[aux] < 0.1 or cor_target[aux] >0.90: #if they are too different or too similar they dont carry info
+            df.drop(i, axis=1, inplace=True)
+        aux += 1
+
+    #relevant_features = cor_target[cor_target > 0.5]
+
+
+    '''    #delete columns
     df.drop('george', axis=1, inplace=True)
     df.drop('000', axis=1, inplace=True)
     df.drop('650', axis=1, inplace=True)
     df.drop('415', axis=1, inplace=True)
     df.drop('85', axis=1, inplace=True)
-    df.drop('1999', axis=1, inplace=True)
+    df.drop('1999', axis=1, inplace=True)'''
 
-    print(df)
+    #print(df)
 
     perc_info = 0.8
     n_info = int((df.shape[1] - 1) * perc_info)
@@ -66,14 +86,14 @@ def readFile(path):
     # report performance
     print('Accuracy: %.3f (%.3f)' % (mean(n_scores), std(n_scores)))
 
-    # fit the model on the whole dataset
+    '''    # fit the model on the whole dataset
     model.fit(X, y)
     # make a single prediction
     row = [
         [0,0.64,0.64,0,0.32,0,0,0,0,0,0,0.64,0,0,0,0.32,0,1.29,1.93,0,0.96,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.778,0,0,3.756,61,278
 ]]
     yhat = model.predict(row)
-    print('Prediction: %d' % yhat[0])
+    print('Prediction: %d' % yhat[0])'''
 
 
 
@@ -82,7 +102,7 @@ def readFile(path):
 
     #print(clean_df.corr(method='pearson')) #calculates the correlation (end of 2nd point)
 
-    return clean_df
+    return clean_df, (mean(n_scores))
 
 
 
@@ -174,7 +194,19 @@ def createGraph (general, df1, df2): #3rd point
 
 # Main
 if __name__ == '__main__':
-    generalDataFrame = readFile("spambase.data")
+
+    nr_repetitions = 5
+    acuracy_avr = 0
+
+    for i in range(0, 5):
+
+        generalDataFrame, avr = readFile("spambase.data")
+
+        acuracy_avr += avr
+
+    acuracy_avr = acuracy_avr / nr_repetitions
+
+    print("acuracy avr - ", acuracy_avr)
 
     #df1 = split_analysis(generalDataFrame, "0=Blood Donor", 2)
     #df2 = analysisOfEveryoneBut(generalDataFrame, "0=Blood Donor", 2)
