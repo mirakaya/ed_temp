@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
+import tensorflow as tf
 
 # import the class
 from sklearn.linear_model import LogisticRegression
@@ -66,3 +67,24 @@ y_pred=clf.predict(X_test)
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 print("Precision:",metrics.precision_score(y_test, y_pred))
 print("Recall:",metrics.recall_score(y_test, y_pred))
+
+
+#Artificial neural networks using tensorflow
+ann = tf.keras.models.Sequential()
+
+ #Adding First Hidden Layer
+ann.add(tf.keras.layers.Dense(units=6,activation="relu"))
+
+ #Adding Second Hidden Layer
+ann.add(tf.keras.layers.Dense(units=6,activation="relu"))
+
+ #Adding Output Layer
+ann.add(tf.keras.layers.Dense(units=1,activation="sigmoid"))
+
+#Compiling ANN
+ann.compile(optimizer="adam",loss="binary_crossentropy",metrics=['accuracy'])
+
+#Fitting ANN
+ann.fit(X_train,y_train,batch_size=32,epochs = 10)
+
+#after 2000 epochs loss: 0.1058 - accuracy: 0.9600
